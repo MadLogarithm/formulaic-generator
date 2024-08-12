@@ -100,7 +100,7 @@ const generateFormulaic = () => {
     <el-row style="display: flex; justify-content: center; width: 100%; margin-top: 10px" v-if="className">
       <el-col :span="24">
         题目数量：
-        <el-input-number v-model="num" :min="1" @change="handleChange" />
+        <el-input-number v-model="num" :min="1" />
       </el-col>
     </el-row>
     <el-row style="display: flex; justify-content: center; width: 100%; margin-top: 10px">
@@ -131,6 +131,6 @@ const generateFormulaic = () => {
 .formulaicContainer {
   margin: 15px;
   height: 100vh;
-  width: 100vw;
+  width: 1200px;
 }
 </style>
