@@ -108,7 +108,7 @@ const generateFormulaic = () => {
         <el-row v-for="stu in stuList" :key="stu.name">
           <el-col :span="2" style="width: 100px">{{ stu.name }}</el-col>
           <el-col :span="5">
-            <el-input-number v-model="stu.score" :min="0" :max=num />
+            <el-input-number v-model="stu.score" :min="0" :max=num @click="stu.attend = true" />
           </el-col>
           <el-col :span="5">
             <el-switch v-model="stu.attend" active-text="出勤" inactive-text="缺勤" />
