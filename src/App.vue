@@ -9,6 +9,8 @@ interface stu {
 }
 
 const mode = ref('')
+const stepMode = ref('')
+const step = ref(1)
 const classList = [
   {
     value: 'Bo4'
@@ -52,7 +54,7 @@ const generateFormulaic = () => {
     formulaic.value = formulaic.value.slice(0, -1)
     formulaic.value += '\n'
   }
-  for (let i = 1; i <= num.value; i++) {
+  for (let i = step.value; i <= num.value; i += step.value) {
     if (stuList.value.filter(stu => stu.attend && stu.score === i).length) {
       formulaic.value += '✍错' + i + '题：\n'
       for (const stu of stuList.value) {
@@ -75,6 +77,14 @@ const generateFormulaic = () => {
     formulaic.value += '请假/未完成\n'
   }
   console.log(formulaic.value)
+}
+
+const changeStep = () => {
+  if (stepMode.value === 'true') {
+    step.value = 0.5
+  } else if (stepMode.value === 'false') {
+    step.value = 1
+  }
 }
 </script>
 
@@ -100,7 +110,9 @@ const generateFormulaic = () => {
     <el-row style="display: flex; justify-content: center; width: 100%; margin-top: 10px" v-if="className">
       <el-col :span="24">
         题目数量：
-        <el-input-number v-model="num" :min="1" />
+        <el-input-number v-model="num" :min="1" style="margin-right: 20px"/>
+        是否含有多选题：
+        <el-switch v-model="stepMode" active-text="是" inactive-text="否" active-value="true" inactive-value="false" @change="changeStep" />
       </el-col>
     </el-row>
     <el-row style="display: flex; justify-content: center; width: 100%; margin-top: 10px">
@@ -108,7 +120,7 @@ const generateFormulaic = () => {
         <el-row v-for="stu in stuList" :key="stu.name">
           <el-col :span="2" style="width: 100px">{{ stu.name }}</el-col>
           <el-col :span="5">
-            <el-input-number v-model="stu.score" :min="0" :max=num @click="stu.attend = true" />
+            <el-input-number v-model="stu.score" :min="0" :max=num :step=step @click="stu.attend = true" />
           </el-col>
           <el-col :span="5">
             <el-switch v-model="stu.attend" active-text="出勤" inactive-text="缺勤" />
