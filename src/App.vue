@@ -40,9 +40,9 @@ const handleChange = () => {
 const generateFormulaic = () => {
   console.log(mode.value)
   if (mode.value === '小测') {
-    formulaic.value = '小测成绩（共' + num.value + '题）：\n'
+    formulaic.value = '小测成绩：\n'
   } else if (mode.value === '作业') {
-    formulaic.value = '家庭作业完成情况（共' + num.value + '题）：\n'
+    formulaic.value = '家庭作业完成情况：\n'
   }
   if (stuList.value.filter(stu => stu.attend && stu.score === 0).length) {
     formulaic.value += '✍全对：\n'
